@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>target</title>
+
+        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+
+        <script src="https://unpkg.com/aframe-spe-particles-component@^1.0.4/dist/aframe-spe-particles-component.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+        <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+
+        <script src="js/playerMovement.js"></script>
+        <script src="js/shoot.js"></script>
+    </head>
+    <body>
+        <a-scene id="scene" inspector-plugin-recast>
+
+            <!--light-->
+            <a-entity light="type: ambient; color: white; intensity:0.5"></a-entity>
+            <a-entity light="type: directional; color: #EEE; intensity: 1" position="-1 1 0"></a-entity>
+
+
+            <a-entity id="camera-rig" movement-controls="speed: 0.2" position="0 1 2" kinematic-body="enableJumps: true;" jump-ability="distance: 2;" networked="template:#avatar-template;attachTemplateToLocal:false;" spawn-in-circle="radius:3" tracker>
+                <!--camera and cursor-->
+                <a-camera id="camera" camera position="0 1.6 0" look-controls="pointerLockEnabled: false">
+                    <a-entity position="0 -4.4 3" rotation="0 180 0" scale="0.35 1 1"
+                    body="type: static; mass: 5; shape: none;" 
+                    shape="shape: sphere; radius: 5; offset: 0 3 0;"
+                    player-movement>
+                    </a-entity>
+                    <a-cursor></a-cursor>
+                </a-camera>
+            </a-entity>
+            
+            <!--Bullets-->
+            <a-entity bullets>
+            </a-entity>
+
+            <!--targets-->
+            <a-box color="brown" 
+            id="t1" 
+            position="0 8 -10" 
+            depth="2" 
+            height="2"
+            width="2" 
+            spe-particles="
+            color: blue, yellow, red;
+            distribution: sphere; 
+            randomize-velocity: true;
+            radius: 1; 
+            particle-count: 800; 
+            velocity: 1; 
+            velocity-spread: 15; 
+            drag: 1; 
+            max-age: 2;
+            duration: -1,
+            blending: additive;
+            active-multiplier: 1000;  
+            size: 1, 1, 1, 0" 
+            dynamic-body></a-box>
+            <a-box color="brown" 
+            id="t1" 
+            position="0 1 0" 
+            depth="4" 
+            height="4"
+            width="4" 
+            static-body></a-box>
+            <a-box color="brown" 
+            id="t1" 
+            position="0 1 -5" 
+            depth="2" 
+            height="2"
+            width="2"
+            static-body></a-box>
+            <a-box color="brown" 
+            id="t1" 
+            position="0 3 -5" 
+            depth="2" 
+            height="2"
+            width="2" 
+            static-body></a-box>
+            <a-box color="brown" 
+            id="t1" 
+            position="0 5 -10" 
+            depth="2" 
+            height="2"
+            width="2" 
+            static-body></a-box>
+            
+            <!--Ground-->
+            <a-plane id="ground" repeat="5 5" position="0 1 0" rotation="-90 0 0" height="200" width="200" color="gray"
+            static-body visible="true">
+            </a-plane>
+           
+            
+        </a-scene>
+    </body>
+</html>
